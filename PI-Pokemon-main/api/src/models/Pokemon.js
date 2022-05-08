@@ -9,7 +9,6 @@ module.exports = (sequelize) => {
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -17,15 +16,15 @@ module.exports = (sequelize) => {
       unique: true,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isAlpha: {
           args: true,
-          msg: "El nombre contiene unicamente letras",
+          msg: "Name only allows letters",
         },
         len: {
           args: [3, 25],
-          msg: "El nombre debe tener entre 3 y 25 caracteres",
+          msg: "Must be between 3-25 chars",
         },
       },
     },
@@ -34,11 +33,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isInt: {
           args: true,
-          msg: "La salud debe ser un número",
+          msg: "Health should be a number",
         },
       },
     },
@@ -47,11 +46,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isInt: {
           args: true,
-          msg: "El ataque debe ser un número",
+          msg: "Must be a number",
         },
       },
     },
@@ -60,11 +59,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isInt: {
           args: true,
-          msg: "La defensa debe ser un número",
+          msg: "Must be a number",
         },
       },
     },
@@ -73,11 +72,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isInt: {
           args: true,
-          msg: "La velocidad debe ser un número",
+          msg: "Must be a number",
         },
       },
     },
@@ -86,11 +85,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isInt: {
           args: true,
-          msg: "La altura debe ser un número",
+          msg: "Must be a number",
         },
       },
     },
@@ -99,11 +98,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "El campo no puede ser nulo",
+          msg: "Can not be null",
         },
         isInt: {
           args: true,
-          msg: "El Peso debe ser un número",
+          msg: "Must be a number",
         },
       },
     },
@@ -111,14 +110,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
+        isUrl: true,
         notNull: {
-          msg: "Este campo no puede ser nulo",
+          msg: "Can not be null",
         },
       },
+      defaultValue:
+        "https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-0.png",
     },
     createdDb: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
       defaultValue: true,
     },
   });
