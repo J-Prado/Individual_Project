@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.css";
 
 import { Detail } from "./components/CharDetail/detail";
 import { CreationPage } from "./components/CreationPage/creationPage";
-import { Home } from "./components/HomePage/home";
+import Home from "./components/HomePage/home";
 import { LandingPage } from "./components/LandingPage/landingPage.jsx";
 
 function App() {
@@ -18,6 +18,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/home/:id" element={<Detail />} />
         <Route path="/create" element={<CreationPage />} />
+        {/* This Line will  navigate to Home if wrong links are introduced */}
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </React.Fragment>
   );

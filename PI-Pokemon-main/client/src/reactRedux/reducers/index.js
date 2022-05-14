@@ -1,7 +1,7 @@
 import {
   GET_POKEMON,
-  FILTER_POKEMON,
-  FILTER_ALL,
+  // FILTER_POKEMON,
+  // FILTER_ALL,
   GET_TYPES,
   SEARCH_BY_ID,
   SEARCH_BY_NAME,
@@ -18,8 +18,8 @@ const initialState = {
   pokemons: [],
   pokemonsBack: [],
   types: [],
-  search: [],
-  pokemonType: [],
+  // search: [],
+  // pokemonType: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -31,6 +31,12 @@ const rootReducer = (state = initialState, action) => {
         pokemonsBack: action.payload,
       };
 
+    case GET_TYPES:
+      return {
+        ...state,
+        types: action.payload,
+      };
+
     case SEARCH_BY_ID:
       return {
         ...state,
@@ -40,21 +46,14 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_BY_NAME:
       return {
         ...state,
-        search: action.payload,
-      };
-
-    case GET_TYPES:
-      return {
-        ...state,
-        types: action.payload,
+        pokemons: action.payload,
       };
 
     case ORDER_A_Z:
       let forward = [...state.pokemons].sort(function (a, b) {
-        let order = a.name
-          .toLocalLowerCase()
-          .localCompare(b.name.toLocalLowerCase());
-        return order;
+        if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) return 1;
+        if (b.name.toLocaleLowerCase() > a.name.toLocaleLowerCase()) return -1;
+        return 0;
       });
       return {
         ...state,
@@ -63,10 +62,9 @@ const rootReducer = (state = initialState, action) => {
 
     case ORDER_Z_A:
       let backward = [...state.pokemons].sort(function (a, b) {
-        let order = b.name
-          .toLocalLowerCase()
-          .localCompare(a.name.toLocalLowerCase());
-        return order;
+        if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) return -1;
+        if (b.name.toLocaleLowerCase() > a.name.toLocaleLowerCase()) return 1;
+        return 0;
       });
       return {
         ...state,
@@ -74,39 +72,40 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case DB_POKEMONS:
-      let dbPokemons = [...state.pokemons].filter((e) => {
-        return e.id.length !== undefined;
-      });
+      const allPokemons = state.pokemonsBack;
+      const filterDb =
+        action.payload === "dataBase"
+          ? allPokemons.filter((el) => el.createdDb)
+          : allPokemons.filter((el) => !el.createdDb);
       return {
         ...state,
-        pokemons: dbPokemons,
+        pokemons: action.payload === "all" ? state.pokemonsBack : filterDb,
       };
 
-    case FILTER_POKEMON:
-      return {
-        ...state,
-        pokemons: action.payload,
-      };
+    // case FILTER_POKEMON:
+    //   return {
+    //     ...state,
+    //     pokemons: action.payload,
+    //   };
 
-    case FILTER_ALL:
-      return {
-        ...state,
-        pokemon: state.pokemonsBack,
-      };
+    // case FILTER_ALL:
+    //   return {
+    //     ...state,
+    //     pokemon: state.pokemonsBack,
+    //   };
 
     case POKEMON_TYPE:
-      let types = [];
-      [...state.pokemonsBack].map((e) =>
-        e.types.forEach((type) => {
-          if (type.name === action.payload) {
-            return types.push(e);
-          }
-        })
-      );
+      const pokemonBack = state.pokemonsBack;
+      const filterType =
+        action.payload === "all"
+          ? pokemonBack
+          : pokemonBack.filter((p) => p.types.includes(action.payload));
+
       return {
         ...state,
-        pokemons: types,
+        pokemons: filterType,
       };
+
     case POST_POKEMONS:
       return {
         ...state,
