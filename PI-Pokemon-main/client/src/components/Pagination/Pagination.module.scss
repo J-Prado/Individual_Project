@@ -1,8 +1,18 @@
-.container {
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+.footBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
-.prevButton {
-}
-.nextButton {
-}
-.inputPage {
+.footBtn {
+  font-size: 20px;
+  font-family: "Monoton", cursive;
+  border: 2px solid rgb(78, 5, 5);
+  border-radius: 70px;
+  text-align: center;
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
 }

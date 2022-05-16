@@ -95,7 +95,7 @@ export default function Home() {
 
   return (
     <React.Fragment>
-      <div>
+      <div className={styles.container}>
         <NavBar
           types={types}
           handleFilterType={handleFilterType}
@@ -106,25 +106,23 @@ export default function Home() {
           handleLowStats={handleLowStats}
           handleClick={handleClick}
         />
-      </div>
-      <div>
-        {statePokemon.length === 0 ? (
-          <LoadingPage />
-        ) : (
-          filterPages()?.map((e) => {
-            return (
-              <IndividualCard
-                key={e.id}
-                name={e.name}
-                image={e.image}
-                types={e.types}
-                id={e.id}
-              />
-            );
-          })
-        )}
-      </div>
-      <div>
+        <div className={styles.cards}>
+          {statePokemon.length === 0 ? (
+            <LoadingPage />
+          ) : (
+            filterPages()?.map((e) => {
+              return (
+                <IndividualCard
+                  key={e.id}
+                  name={e.name}
+                  image={e.image}
+                  types={e.types}
+                  id={e.id}
+                />
+              );
+            })
+          )}
+        </div>
         <Pagination
           allPokemons={statePokemon.length}
           pokemonsPerPage={perPage}

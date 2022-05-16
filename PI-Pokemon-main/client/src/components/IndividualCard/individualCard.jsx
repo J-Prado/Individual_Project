@@ -10,12 +10,12 @@ export function IndividualCard({ image, name, types, id }) {
           <img className={styles.image} src={image} alt={name} />
         </div>
         <div className={styles.detail}>
-          <span className={styles.text}>Name: {name}</span>
+          <p className={styles.text}>Name: {name}</p>
           Types:
           {types.map((e) => (
-            <span className={styles.text} key={e}>
+            <p className={styles.text} key={e}>
               {e}
-            </span>
+            </p>
           ))}
         </div>
       </Link>

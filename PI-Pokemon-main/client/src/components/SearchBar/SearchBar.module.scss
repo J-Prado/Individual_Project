@@ -1,6 +1,20 @@
 .searchBar {
+  display: flex;
+  gap: 1%;
 }
+.searchImg {
+  height: 16px;
+}
+
 .searchInput {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px;
+  outline: 0;
+  font-size: 0.8rem;
+  padding: 7px 0;
+  transition: border-color 0.2s;
+  border-bottom: 2px solid rgb(33, 32, 32);
 }
 .searchButton {
 }

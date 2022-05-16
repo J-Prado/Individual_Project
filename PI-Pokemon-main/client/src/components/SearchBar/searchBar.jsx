@@ -31,10 +31,12 @@ export default function SearchBar() {
         type="submit"
         onClick={handleSubmit}
       >
-        Search
+        <img
+          className={styles.searchImg}
+          src="https://cdn.iconscout.com/icon/free/png-64/search-1768073-1502246.png"
+          alt="Search Bar"
+        />
       </button>
-
-      <div>Results</div>
     </div>
   );
 }

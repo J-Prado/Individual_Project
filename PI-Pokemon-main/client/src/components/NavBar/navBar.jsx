@@ -14,22 +14,20 @@ export default function NavBar({
   handleClick,
 }) {
   return (
-    <nav>
-      <div>
-        <img
-          src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
-          alt="Welcome to the home page."
-          onClick={handleClick}
-        />
-      </div>
-      <div className={styles.navContainer}>
-        <div>
-          <SearchBar />
+    <React.Fragment>
+      <nav className={styles.container}>
+        <div className={styles.navImg}>
+          <img
+            className={styles.navPic}
+            src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
+            alt="Welcome to the home page."
+            onClick={handleClick}
+          />
         </div>
-        <div>
+        <div className={styles.navSelect}>
           <select onChange={handleFilterType}>
             <option value="all" key="all">
-              all types{" "}
+              All types
             </option>
             {types?.map((type) => {
               return (
@@ -40,32 +38,45 @@ export default function NavBar({
             })}
           </select>
         </div>
-        <div>
+
+        <div className={styles.navSelect}>
           <select onChange={handleFilterDataBase}>
             <option value="all">All Pokemons</option>
             <option value="dataBase">My Pokemons</option>
             <option value="api">Server</option>
           </select>
         </div>
-        <div>
-          <button onClick={handleNameFor}>From A - Z</button>
-        </div>
-        <div>
-          <button onClick={handleNameBack}>From Z - A</button>
-        </div>
-        <div>
-          <button onClick={handleHighStats}>From Strong to Weak</button>
-        </div>
-        <div>
-          <button onClick={handleLowStats}>From Weak to Strong</button>
-        </div>
-      </div>
+        <div className={styles.navContainer2}>
+          <span className={styles.navMenu}></span>
+          <span className={styles.navMenu2}></span>
 
-      <div>
-        <Link to="/create">
-          <button className={styles.navBut}>Create Pokemon</button>
-        </Link>
-      </div>
-    </nav>
+          <input className={styles.inputNew} type="checkbox"></input>
+          <div className={styles.navOp}>
+            <button className={styles.navButtons} onClick={handleNameFor}>
+              From A - Z
+            </button>
+
+            <button className={styles.navButtons} onClick={handleNameBack}>
+              From Z - A
+            </button>
+
+            <button className={styles.navButtons} onClick={handleHighStats}>
+              From Strong to Weak
+            </button>
+
+            <button className={styles.navButtons} onClick={handleLowStats}>
+              From Weak to Strong
+            </button>
+          </div>
+          <SearchBar />
+        </div>
+
+        <div className={styles.navBut}>
+          <Link to="/create">
+            <button>Create Pokemon</button>
+          </Link>
+        </div>
+      </nav>
+    </React.Fragment>
   );
 }

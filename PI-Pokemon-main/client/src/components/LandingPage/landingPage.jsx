@@ -13,7 +13,7 @@ export function LandingPage() {
         />
         <Link to="/home">
           <button className={styles.button}>
-            <span>Press Here</span>
+            <span>PRESS HERE</span>
           </button>
         </Link>
       </div>

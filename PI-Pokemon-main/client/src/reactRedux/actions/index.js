@@ -85,38 +85,11 @@ export function getById(id) {
 //   };
 // }
 
-export function postPokemon(
-  name,
-  hp,
-  attack,
-  defense,
-  speed,
-  heigth,
-  weight,
-  type1,
-  type2,
-  image
-) {
+export function postPokemon(input) {
   return async function (dispatch) {
-    const body = {
-      name,
-      hp,
-      attack,
-      defense,
-      speed,
-      heigth,
-      weight,
-      image,
-    };
-    const send = { ...body, type1: [type1, type2] };
-    await axios.post("http://localhost:3001/pokemons", send);
-    const get = await axios.get("http://localhost:3001/pokemons");
-    const json = await get.data;
+    let route = await axios.post("http://localhost:3001/pokemons", input);
 
-    return dispatch({
-      type: POST_POKEMONS,
-      payload: json,
-    });
+    return route;
   };
 }
 

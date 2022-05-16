@@ -12,12 +12,16 @@ export default function Pagination({
   }
 
   return (
-    <nav>
+    <div className={styles.footBar}>
       {pageNumbers?.map((number) => (
-        <div key={number}>
-          <button onClick={() => pagination(number)}>{number}</button>
-        </div>
+        <button
+          key={number}
+          className={styles.footBtn}
+          onClick={() => pagination(number)}
+        >
+          {number}
+        </button>
       ))}
-    </nav>
+    </div>
   );
 }
