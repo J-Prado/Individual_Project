@@ -9,8 +9,6 @@ import {
   dbPokemons,
   forwardAlphabet,
   backwardAlphabet,
-  // filterPokemon,
-  // filterAll,
   comparisonHigh,
   comparisonLow,
 } from "../../reactRedux/actions/index.js";

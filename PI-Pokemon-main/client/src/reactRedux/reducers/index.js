@@ -1,7 +1,5 @@
 import {
   GET_POKEMON,
-  // FILTER_POKEMON,
-  // FILTER_ALL,
   GET_TYPES,
   SEARCH_BY_ID,
   SEARCH_BY_NAME,
@@ -18,7 +16,7 @@ const initialState = {
   pokemons: [],
   pokemonsBack: [],
   types: [],
-  // search: [],
+  search: [],
   // pokemonType: [],
 };
 
@@ -82,25 +80,12 @@ const rootReducer = (state = initialState, action) => {
         pokemons: action.payload === "all" ? state.pokemonsBack : filterDb,
       };
 
-    // case FILTER_POKEMON:
-    //   return {
-    //     ...state,
-    //     pokemons: action.payload,
-    //   };
-
-    // case FILTER_ALL:
-    //   return {
-    //     ...state,
-    //     pokemon: state.pokemonsBack,
-    //   };
-
     case POKEMON_TYPE:
       const pokemonBack = state.pokemonsBack;
       const filterType =
         action.payload === "all"
           ? pokemonBack
           : pokemonBack.filter((p) => p.types.includes(action.payload));
-
       return {
         ...state,
         pokemons: filterType,

@@ -1,14 +1,12 @@
 import axios from "axios";
 
 export const GET_POKEMON = "GET_POKEMON";
-// export const FILTER_POKEMON = "FILTER_POKEMON";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const SEARCH_BY_ID = "SEARCH_BY_ID";
 export const GET_TYPES = "GET_TYPES";
 export const POST_POKEMONS = "POST_POKEMONS";
 export const DB_POKEMONS = "DB_POKEMONS";
 export const POKEMON_TYPE = "POKEMON_TYPE";
-// export const FILTER_ALL = "FILTER_ALL";
 export const ORDER_A_Z = "ORDER_A_Z";
 export const ORDER_Z_A = "ORDER_Z_A";
 export const HIGH_TO_LOW = "HIGH_TO_LOW";
@@ -38,18 +36,12 @@ export function get_types() {
 
 export function getByName(name) {
   return async function (dispatch) {
-    try {
-      const res = await axios.get(
-        `http://localhost:3001/pokemons?name=${name}`
-      );
-      const json = await res.data;
-      return dispatch({
-        type: SEARCH_BY_NAME,
-        payload: [json],
-      });
-    } catch (error) {
-      throw new TypeError("Pokemon not Found");
-    }
+    const res = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+    const json = await res.data;
+    return dispatch({
+      type: SEARCH_BY_NAME,
+      payload: [json],
+    });
   };
 }
 
@@ -69,21 +61,6 @@ export function getById(id) {
     });
   };
 }
-
-// export function filterPokemon(type, pokemons) {
-//   return async function (dispatch) {
-//     const filtrados = [];
-//     await pokemons.map((obj) =>
-//       obj.types.map((name) => {
-//         return name === type ? filtrados.push(obj) : "";
-//       })
-//     );
-//     return dispatch({
-//       type: FILTER_POKEMON,
-//       payload: filtrados,
-//     });
-//   };
-// }
 
 export function postPokemon(input) {
   return async function (dispatch) {

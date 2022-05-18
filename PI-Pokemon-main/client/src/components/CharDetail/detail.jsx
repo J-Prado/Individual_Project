@@ -40,6 +40,7 @@ export function Detail() {
               alt={detailPoke.name}
             />
             <div className={styles.details}>
+              <p>Id: {detailPoke.id}</p>
               <p>Hp: {detailPoke.hp}</p>
               <p>Attack: {detailPoke.attack}</p>
               <p>Defense: {detailPoke.defense}</p>

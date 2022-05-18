@@ -58,10 +58,10 @@ function validation(input) {
     error.height = "Must be an integer and greater than 0";
   }
 
-  if (!input.types) {
+  if (input.types.length === 0) {
     error.types = "Must select at least one option.";
   }
-
+  console.log(error);
   return error;
 }
 
@@ -110,31 +110,27 @@ export function CreationPage() {
     );
   };
 
-  const handleSelect = (e) => {
-    if (input.types?.indexOf(Number(e.target.value)) === -1) {
-      setInput({
+  const handleSelect = (event) => {
+    setInput({
+      ...input,
+      types: [...input.types, event.target.value],
+    });
+    setError(
+      validation({
         ...input,
-        types: [...input.types, Number(e.target.value)],
-      });
-      setError(
-        validation({
-          ...input,
-          types: [...input.types, Number(e.target.value)],
-        })
-      );
-    } else {
-      alert("Este tipo ya existe");
-    }
+        types: [...input.types, event.target.value],
+      })
+    );
     console.log(input.types);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(validation(error));
-    if (Object.keys(error).length !== 0) {
+    if (!Object.keys(error)) {
       alert("All blank spaces must be filled to create your pokemon.");
     } else {
-      if (input.types.length === 0) return setError("Select the pokemon type");
+      if (!input.types) return setError("Select the pokemon type");
       else {
         alert("Sending the form to create your Pokemon.");
         dispatch(postPokemon(input));
@@ -168,8 +164,8 @@ export function CreationPage() {
     setInputCopy(newInput);
   };
 
-  const pokeIdNam = (id) => {
-    let findName = types.find((t) => t.id === id);
+  const pokeIdNam = (name) => {
+    let findName = types.find((t) => t.name === name);
     if (findName) return findName.name;
   };
 
@@ -178,161 +174,153 @@ export function CreationPage() {
   }, [dispatch]);
 
   return (
-    <div>
-      <Link to="/home">
-        <button>
-          <img
-            src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
-            alt="Returning Home"
-          />
-        </button>
-      </Link>
-      <div>
+    <div className={styles.generalContainer}>
+      <div className={styles.image3}>
         <img
+          src="https://i.pinimg.com/originals/bc/c8/be/bcc8be0c6b5fa23fd06ac493878e3c3f.gif"
+          alt="Creation Page"
+        />
+      </div>
+      <div className={styles.imageCont}>
+        <Link to="/home">
+          <button>
+            <img
+              className={styles.image}
+              src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
+              alt="Returning Home"
+            />
+          </button>
+        </Link>
+
+        <img
+          className={styles.image2}
           src="https://www.freepnglogos.com/uploads/gotta-catch-em-all-transparent-pokemon-logo-11.png"
           alt="Title"
         />
       </div>
-      <h1>Create your Pokemon</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <label>Pokemon Name:</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              value={input.name}
-              name="name"
-              placeholder="Enter the Pokemon Name"
-              onChange={handleChangeInput}
-            />
-            {error.name && <p>{error.name}</p>}
-          </div>
-          <div>
-            <div>
-              <label>HP: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.hp}
-                name="hp"
-                onChange={handleChangeInput}
-              />
-              {error.hp && <p>{error.hp}</p>}
-            </div>
-          </div>
-          <div>
-            <div>
-              <label>Attack: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.attack}
-                name="attack"
-                onChange={handleChangeInput}
-              />
-              {error.attack && <p>{error.attack}</p>}
-            </div>
-          </div>
-          <div>
-            <div>
-              <label>Defense: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.defense}
-                name="defense"
-                onChange={handleChangeInput}
-              />
-              {error.defense && <p>{error.defense}</p>}
-            </div>
-          </div>
-          <div>
-            <div>
-              <label>Speed: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.speed}
-                name="speed"
-                onChange={handleChangeInput}
-              />
-              {error.speed && <p>{error.speed}</p>}
-            </div>
-          </div>
-          <div>
-            <div>
-              <label>Weight: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.weight}
-                name="weight"
-                onChange={handleChangeInput}
-              />
-              {error.weight && <p>{error.weight}</p>}
-            </div>
-          </div>
-          <div>
-            <div>
-              <label>Height: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.height}
-                name="height"
-                onChange={handleChangeInput}
-              />
-              {error.height && <p>{error.height}</p>}
-            </div>
-          </div>
-          <div>
-            <div>
-              <label>Image: </label>
-            </div>
-            <div>
-              <input
-                type="text"
-                value={input.image}
-                name="image"
-                onChange={handleChangeInput}
-              />
-              {error.image && <p>{error.image}</p>}
-            </div>
-          </div>
-          <div>
-            <label>Pokemon Type:</label>
-            <select key="select" onChange={handleSelect}>
-              <option value="" disabled>
-                Pokemon types
-              </option>
-              {types?.map((type) => (
-                <option value={type.id} key={type.id}>
-                  {type.name}
-                </option>
-              ))}
-            </select>
-
-            <div>
-              {input.types?.map((type) => (
-                <div key={type}>
-                  <button className={styles.types} onClick={handleDeleteType}>
-                    {" "}
-                    {pokeIdNam(type)}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-          <button type="submit">Create Pokemon</button>
+      <h1 className={styles.tittle}>Create your Pokemon</h1>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.space}>
+          <input
+            className={styles.input}
+            type="text"
+            value={input.name}
+            name="name"
+            placeholder="Enter the Pokemon Name"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Pokemon Name: </label>
+          <div>{error.name && <p>{error.name}</p>}</div>
         </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.hp}
+            placeholder="Enter the Pokemon Name"
+            name="hp"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>HP: </label>
+          <div>{error.hp && <p>{error.hp}</p>}</div>
+        </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.attack}
+            name="attack"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Attack: </label>
+          <div> {error.attack && <p>{error.attack}</p>}</div>
+        </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.defense}
+            name="defense"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Defense: </label>
+          <div>{error.defense && <p>{error.defense}</p>}</div>
+        </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.speed}
+            name="speed"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Speed: </label>
+          <div>{error.speed && <p>{error.speed}</p>}</div>
+        </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.weight}
+            name="weight"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Weight: </label>
+          <div>{error.weight && <p>{error.weight}</p>}</div>
+        </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.height}
+            name="height"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Height: </label>
+          <div> {error.height && <p>{error.height}</p>}</div>
+        </div>
+        <div className={styles.space}>
+          <input
+            type="text"
+            className={styles.input}
+            value={input.image}
+            name="image"
+            onChange={handleChangeInput}
+          />
+          <label className={styles.labels}>Image: </label>
+          <div>{error.image && <p>{error.image}</p>}</div>
+        </div>
+        <div>
+          <label className={styles.label}>Pokemon Type: </label>
+          <select
+            className={styles.select}
+            key="select"
+            onChange={handleSelect}
+          >
+            <option value="" disabled>
+              Pokemon types
+            </option>
+            {types?.map((type) => (
+              <option value={type.name} key={type.id}>
+                {type.name}
+              </option>
+            ))}
+          </select>
+
+          <div>
+            {input.types?.map((type) => (
+              <div key={type}>
+                <button className={styles.types} onClick={handleDeleteType}>
+                  {pokeIdNam(type)}
+                </button>
+              </div>
+            ))}
+          </div>
+          {error.types && <p>{error.types}</p>}
+        </div>
+        <button className={styles.button} type="submit">
+          Create Pokemon
+        </button>
       </form>
     </div>
   );
