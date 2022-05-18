@@ -23,8 +23,8 @@ module.exports = (sequelize) => {
           msg: "Name only allows letters",
         },
         len: {
-          args: [3, 25],
-          msg: "Must be between 3-25 chars",
+          args: [2, 25],
+          msg: "Must be between 2-25 chars",
         },
       },
     },

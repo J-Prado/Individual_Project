@@ -67,8 +67,9 @@ const getName = async (name) => {
   try {
     const pokemonFromDb = await Pokemon.findOne({
       where: { name },
-      include: { model: Type },
+      include: Type,
     });
+    console.log(pokemonFromDb);
     if (pokemonFromDb) {
       let dbName = {
         id: pokemonFromDb.id,
@@ -81,7 +82,7 @@ const getName = async (name) => {
         weight: pokemonFromDb.weight,
         image: pokemonFromDb.image,
         createdDb: pokemonFromDb.createdDb,
-        types: searchPokeIdDb.types.map((type) => type.name),
+        types: pokemonFromDb.types.map((type) => type.name),
       };
       return dbName;
     } else {
@@ -105,7 +106,7 @@ const getId = async (id) => {
         where: { id },
         include: Type,
       });
-      console.log("Pokemon Data Base", searchPokeIdDb);
+
       let dbPokeId = {
         id: searchPokeIdDb.id,
         name: searchPokeIdDb.name,
@@ -154,7 +155,7 @@ const postPokeDb = async (pokeData) => {
   try {
     const { name, hp, attack, defense, speed, height, weight, image, types } =
       pokeData;
-    console.log(types);
+    // console.log(types);
     const myPokemon = await Pokemon.create({
       name,
       hp,
@@ -166,7 +167,13 @@ const postPokeDb = async (pokeData) => {
       image,
     });
 
-    let createdMyPoke = await myPokemon.addType(types);
+    let dbTypes = await Promise.all(
+      types.map((e) => {
+        return Type.findOne({ where: { name: e } });
+      })
+    );
+    // console.log(dbTypes);
+    let createdMyPoke = await myPokemon.setTypes(dbTypes);
     return createdMyPoke;
   } catch (error) {
     console.log(error);
