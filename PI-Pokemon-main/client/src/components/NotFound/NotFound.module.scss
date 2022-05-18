@@ -1,6 +1,17 @@
 .container {
+  display: flex;
+  text-align: center;
+
+  position: relative;
+  left: 200px;
 }
 .message {
+  width: 600px;
+  justify-content: center;
+  align-self: center;
+  font-size: 50px;
 }
 .image {
+  align-self: center;
+  height: 400px;
 }

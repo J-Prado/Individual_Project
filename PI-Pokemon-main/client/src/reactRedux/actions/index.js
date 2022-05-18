@@ -36,12 +36,19 @@ export function get_types() {
 
 export function getByName(name) {
   return async function (dispatch) {
-    const res = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
-    const json = await res.data;
-    return dispatch({
-      type: SEARCH_BY_NAME,
-      payload: [json],
-    });
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/pokemons?name=${name}`
+      );
+      const json = await res.data;
+      return dispatch({
+        type: SEARCH_BY_NAME,
+        payload: [json],
+      });
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   };
 }
 

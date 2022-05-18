@@ -1,21 +1,18 @@
 .container {
-  // background: linear-gradient(
-  //   90deg,
-  //   rgb(36, 0, 0) 0%,
-  //   rgb(128, 66, 52) 35%,
-  //   rgba(165, 93, 51, 0.962) 100%
-  // );
+  display: flex;
+  flex-direction: column;
 }
 .cards {
-  padding-left: 7%;
-  padding-top: 2%;
+  position: relative;
+  top: 60px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 0.2fr);
   grid-gap: 10px;
-  align-items: center;
   justify-content: center;
-  img {
-    width: 250px;
-    height: 250px;
-  }
+}
+
+.pagination {
+  position: relative;
+  top: 70px;
+  padding-bottom: 20px;
 }

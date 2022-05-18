@@ -28,9 +28,11 @@ export default function Home() {
 
   //Now the pagination has to be limited to 12 in each page
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(12);
+  const [perPage] = useState(12);
+
   const lastPokemon = page * perPage;
   const firstPokemon = lastPokemon - perPage;
+
   const currentPokemons = statePokemon.slice(firstPokemon, lastPokemon);
   const pokeFirstPag = statePokemon.slice(firstPokemon, lastPokemon);
 
@@ -48,7 +50,7 @@ export default function Home() {
     dispatch(get_types());
   }, [dispatch]);
 
-  const [order, setOrder] = useState("");
+  const [setOrder] = useState("");
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -92,7 +94,7 @@ export default function Home() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className={styles.container}>
         <NavBar
           types={types}
@@ -107,6 +109,8 @@ export default function Home() {
         <div className={styles.cards}>
           {statePokemon.length === 0 ? (
             <LoadingPage />
+          ) : statePokemon.length === 1 && statePokemon[0].message ? (
+            <NotFound />
           ) : (
             filterPages()?.map((e) => {
               return (
@@ -121,12 +125,18 @@ export default function Home() {
             })
           )}
         </div>
-        <Pagination
-          allPokemons={statePokemon.length}
-          pokemonsPerPage={perPage}
-          pagination={pagination}
-        />
+        <div className={styles.pagination}>
+          {statePokemon.length === 1 &&
+          statePokemon.message ===
+            "Request failed with status code 404" ? null : (
+            <Pagination
+              allPokemons={statePokemon.length}
+              pokemonsPerPage={perPage}
+              pagination={pagination}
+            />
+          )}
+        </div>
       </div>
-    </React.Fragment>
+    </>
   );
 }

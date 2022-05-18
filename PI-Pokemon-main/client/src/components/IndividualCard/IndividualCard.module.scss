@@ -1,10 +1,37 @@
-.link {
-}
 .container {
+  box-shadow: 0px 0px 20px 10px #999;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  padding: 20px;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  background-image: url("https://cdn.pixabay.com/photo/2020/03/06/21/08/illustration-4908159_1280.jpg");
+  background-size: 100% 100%;
+  background-position-y: -70px;
+  background-repeat: no-repeat;
+}
+.container:hover {
+  opacity: 0.5;
 }
 .image {
+  height: 150px;
+  width: 150px;
 }
 .detail {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
-.text {
+.text2 {
+  text-decoration: underline;
+}
+.type {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.text3::first-letter {
+  text-transform: capitalize;
 }

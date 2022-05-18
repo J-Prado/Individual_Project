@@ -1,11 +1,11 @@
-import React, { useState, useSelector } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "../SearchBar/SearchBar.module.scss";
 import { getByName } from "../../reactRedux/actions/index.js";
+
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [state, setState] = useState("");
-  // const pokemons = useSelector((state) => state.pokemons);
 
   const handleChange = (event) => {
     event.preventDefault();

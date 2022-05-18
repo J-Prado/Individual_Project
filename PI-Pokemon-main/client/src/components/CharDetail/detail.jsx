@@ -32,7 +32,7 @@ export function Detail() {
 
       {detailPoke ? (
         <div className={styles.container}>
-          <h1>{detailPoke.name}</h1>
+          <h1>{detailPoke.name?.toLocaleUpperCase()}</h1>
           <div className={styles.card}>
             <img
               className={styles.image}
@@ -48,6 +48,9 @@ export function Detail() {
               <p>Height: {detailPoke.height}</p>
               <p>Weight: {detailPoke.weight}</p>
               <p>Types:</p>
+              {detailPoke.types?.map((e) => (
+                <p key={e}>{e}</p>
+              ))}
             </div>
           </div>
         </div>

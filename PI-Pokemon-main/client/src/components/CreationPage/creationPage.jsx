@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { get_types, postPokemon } from "../../reactRedux/actions/index.js";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import styles from "../CreationPage/CreationPage.module.scss";
+
 function validation(input) {
   let error = {};
   let nameRequired = /^[a-zA-Z]+$/;
@@ -58,7 +60,7 @@ function validation(input) {
     error.height = "Must be an integer and greater than 0";
   }
 
-  if (input.types.length === 0) {
+  if (!input.types) {
     error.types = "Must select at least one option.";
   }
   console.log(error);
@@ -82,7 +84,7 @@ export function CreationPage() {
     types: [],
   });
 
-  const [inputCopy, setInputCopy] = useState({ ...input });
+  const [setInputCopy] = useState({ ...input });
 
   const handleChangeInput = (event) => {
     if (!isNaN(parseInt(event.target.value))) {
