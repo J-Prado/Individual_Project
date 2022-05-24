@@ -14,7 +14,7 @@ export const LOW_TO_HIGH = "LOW_TO_HIGH";
 
 export function getPokemon() {
   return async function (dispatch) {
-    const resp = await axios.get("http://localhost:3001/pokemons");
+    const resp = await axios.get("/pokemons");
     const json = await resp.data;
     return dispatch({
       type: GET_POKEMON,
@@ -25,7 +25,7 @@ export function getPokemon() {
 
 export function get_types() {
   return async function (dispatch) {
-    const res = await axios.get("http://localhost:3001/types");
+    const res = await axios.get("/types");
     const json = await res.data;
     return dispatch({
       type: GET_TYPES,
@@ -37,9 +37,7 @@ export function get_types() {
 export function getByName(name) {
   return async function (dispatch) {
     try {
-      const res = await axios.get(
-        `http://localhost:3001/pokemons?name=${name}`
-      );
+      const res = await axios.get(`/pokemons?name=${name}`);
       const json = await res.data;
       return dispatch({
         type: SEARCH_BY_NAME,
@@ -60,7 +58,7 @@ export function getById(id) {
     //     payload: "clear",
     //   });
     // }
-    const res = await axios.get(`http://localhost:3001/pokemons/${id}`);
+    const res = await axios.get(`/pokemons/${id}`);
     const json = await res.data;
     return dispatch({
       type: SEARCH_BY_ID,
@@ -71,7 +69,7 @@ export function getById(id) {
 
 export function postPokemon(input) {
   return async function (dispatch) {
-    let route = await axios.post("http://localhost:3001/pokemons", input);
+    let route = await axios.post("/pokemons", input);
 
     return route;
   };
@@ -94,14 +92,6 @@ export function typePokemon(type) {
     });
   };
 }
-
-// export function filterAll() {
-//   return async function (dispatch) {
-//     return dispatch({
-//       type: FILTER_ALL,
-//     });
-//   };
-// }
 
 export function comparisonHigh() {
   return async function (dispatch) {
