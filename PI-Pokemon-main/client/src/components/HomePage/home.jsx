@@ -28,13 +28,17 @@ export default function Home() {
 
   //Now the pagination has to be limited to 12 in each page
   const [page, setPage] = useState(1);
-  const [perPage] = useState(12);
+  const [perPage, setPerPage] = useState(12);
 
   const lastPokemon = page * perPage;
   const firstPokemon = lastPokemon - perPage;
 
-  const currentPokemons = statePokemon.slice(firstPokemon, lastPokemon);
-  const pokeFirstPag = statePokemon.slice(firstPokemon, lastPokemon);
+  const currentPokemons = Array.isArray(statePokemon)
+    ? statePokemon.slice(firstPokemon, lastPokemon)
+    : [];
+  const pokeFirstPag = Array.isArray(statePokemon)
+    ? statePokemon.slice(firstPokemon, lastPokemon)
+    : [];
 
   const pagination = (pageNumber) => {
     setPage(pageNumber);
@@ -50,7 +54,7 @@ export default function Home() {
     dispatch(get_types());
   }, [dispatch]);
 
-  const [setOrder] = useState("");
+  const [order, setOrder] = useState("");
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -126,7 +130,7 @@ export default function Home() {
           )}
         </div>
         <div className={styles.pagination}>
-          {statePokemon.length === 1 &&
+          {statePokemon?.length === 1 &&
           statePokemon.message ===
             "Request failed with status code 404" ? null : (
             <Pagination

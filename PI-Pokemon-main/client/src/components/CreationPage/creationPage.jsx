@@ -4,7 +4,17 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "../CreationPage/CreationPage.module.scss";
-
+function enable(input, error) {
+  if (
+    input.types.length === 0 ||
+    input.name.length === 0 ||
+    input.image.length === 0 ||
+    error.hasOwnProperty("types")
+  ) {
+    return true;
+  }
+  return false;
+}
 function validation(input) {
   let error = {};
   let nameRequired = /^[a-zA-Z]+$/;
@@ -60,10 +70,11 @@ function validation(input) {
     error.height = "Must be an integer and greater than 0";
   }
 
-  if (!input.types) {
+  if (input.types?.length === 0) {
     error.types = "Must select at least one option.";
   }
   console.log(error);
+  console.log(input);
   return error;
 }
 
@@ -84,7 +95,7 @@ export function CreationPage() {
     types: [],
   });
 
-  const [setInputCopy] = useState({ ...input });
+  const [inputCopy, setInputCopy] = useState({ ...input });
 
   const handleChangeInput = (event) => {
     if (!isNaN(parseInt(event.target.value))) {
@@ -206,13 +217,15 @@ export function CreationPage() {
           <input
             className={styles.input}
             type="text"
-            value={input.name}
+            value={input.name?.toString().toLocaleLowerCase()}
             name="name"
             placeholder="Enter the Pokemon Name"
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Pokemon Name: </label>
-          <div>{error.name && <p>{error.name}</p>}</div>
+          <div className={styles.errors}>
+            {error.name && <p>{error.name}</p>}
+          </div>
         </div>
         <div className={styles.space}>
           <input
@@ -224,7 +237,7 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>HP: </label>
-          <div>{error.hp && <p>{error.hp}</p>}</div>
+          <div className={styles.errors}>{error.hp && <p>{error.hp}</p>}</div>
         </div>
         <div className={styles.space}>
           <input
@@ -235,7 +248,9 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Attack: </label>
-          <div> {error.attack && <p>{error.attack}</p>}</div>
+          <div className={styles.errors}>
+            {error.attack && <p>{error.attack}</p>}
+          </div>
         </div>
         <div className={styles.space}>
           <input
@@ -246,7 +261,9 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Defense: </label>
-          <div>{error.defense && <p>{error.defense}</p>}</div>
+          <div className={styles.errors}>
+            {error.defense && <p>{error.defense}</p>}
+          </div>
         </div>
         <div className={styles.space}>
           <input
@@ -257,7 +274,9 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Speed: </label>
-          <div>{error.speed && <p>{error.speed}</p>}</div>
+          <div className={styles.errors}>
+            {error.speed && <p>{error.speed}</p>}
+          </div>
         </div>
         <div className={styles.space}>
           <input
@@ -268,7 +287,9 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Weight: </label>
-          <div>{error.weight && <p>{error.weight}</p>}</div>
+          <div className={styles.errors}>
+            {error.weight && <p>{error.weight}</p>}
+          </div>
         </div>
         <div className={styles.space}>
           <input
@@ -279,7 +300,10 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Height: </label>
-          <div> {error.height && <p>{error.height}</p>}</div>
+          <div className={styles.errors}>
+            {" "}
+            {error.height && <p>{error.height}</p>}
+          </div>
         </div>
         <div className={styles.space}>
           <input
@@ -290,7 +314,9 @@ export function CreationPage() {
             onChange={handleChangeInput}
           />
           <label className={styles.labels}>Image: </label>
-          <div>{error.image && <p>{error.image}</p>}</div>
+          <div className={styles.errors}>
+            {error.image && <p>{error.image}</p>}
+          </div>
         </div>
         <div>
           <label className={styles.label}>Pokemon Type: </label>
@@ -313,6 +339,7 @@ export function CreationPage() {
             {input.types?.map((type) => (
               <div key={type}>
                 <button className={styles.types} onClick={handleDeleteType}>
+                  <span className={styles.delete}>X</span>
                   {pokeIdNam(type)}
                 </button>
               </div>
@@ -320,7 +347,11 @@ export function CreationPage() {
           </div>
           {error.types && <p>{error.types}</p>}
         </div>
-        <button className={styles.button} type="submit">
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={enable(input, error)}
+        >
           Create Pokemon
         </button>
       </form>

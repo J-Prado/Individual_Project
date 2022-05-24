@@ -20,7 +20,13 @@
 }
 
 .navPic {
+  position: relative;
   height: 50px;
+  top: 2px;
+  &:hover {
+    opacity: 0.5;
+  }
+  cursor: pointer;
 }
 
 .navSelect {
@@ -34,6 +40,14 @@
   outline: none;
   position: relative;
   left: 1050px;
+  --h: 1.2em;
+}
+select {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .inputNew {

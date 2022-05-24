@@ -13,21 +13,20 @@ export function Detail() {
 
   useEffect(() => {
     dispatch(getById(id));
-    // return function cleanUp() {
-    //   dispatch(getById("clear"));
-    // };
   }, [dispatch, id]);
 
   return (
     <React.Fragment>
       <Link to="/home">
-        <button>
-          <img
-            className={styles.pic}
-            src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
-            alt="Returning Home"
-          />
-        </button>
+        <div className={styles.picCont}>
+          <button>
+            <img
+              className={styles.pic}
+              src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
+              alt="Returning Home"
+            />
+          </button>
+        </div>
       </Link>
 
       {detailPoke ? (
@@ -40,16 +39,45 @@ export function Detail() {
               alt={detailPoke.name}
             />
             <div className={styles.details}>
-              <p>Id: {detailPoke.id}</p>
-              <p>Hp: {detailPoke.hp}</p>
-              <p>Attack: {detailPoke.attack}</p>
-              <p>Defense: {detailPoke.defense}</p>
-              <p>Speed: {detailPoke.speed}</p>
-              <p>Height: {detailPoke.height}</p>
-              <p>Weight: {detailPoke.weight}</p>
-              <p>Types:</p>
+              <div>Id:</div>
+              <span className={styles.content}>{detailPoke.id}</span>
+              <div>Hp: </div>
+              <span
+                className={styles.content1}
+                style={{ width: detailPoke.hp }}
+              >
+                {detailPoke.hp}
+              </span>
+              <div>Attack:</div>
+              <span
+                className={styles.content1}
+                style={{ width: detailPoke.attack }}
+              >
+                {detailPoke.attack}
+              </span>
+              <div>Defense:</div>
+              <span
+                className={styles.content1}
+                style={{ width: detailPoke.defense }}
+              >
+                {detailPoke.defense}
+              </span>
+              <div>Speed:</div>
+              <span
+                className={styles.content1}
+                style={{ width: detailPoke.speed }}
+              >
+                {detailPoke.speed}
+              </span>
+              <div>Height:</div>
+              <span>{detailPoke.height}</span>
+              <div>Weight: </div>
+              <span>{detailPoke.weight}</span>
+              <div>Types:</div>
               {detailPoke.types?.map((e) => (
-                <p key={e}>{e}</p>
+                <div key={e}>
+                  * {e?.charAt(0).toLocaleUpperCase() + e?.slice(1)}
+                </div>
               ))}
             </div>
           </div>

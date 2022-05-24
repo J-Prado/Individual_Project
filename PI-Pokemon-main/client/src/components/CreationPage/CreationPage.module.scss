@@ -1,10 +1,24 @@
 .types {
+  text-transform: capitalize;
+  font-size: 15px;
 }
+
 .image {
   height: 50px;
   margin-top: 4px;
+  &:hover {
+    opacity: 0.5;
+  }
 }
-
+.delete {
+  border-radius: 20px;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  border: rgb(211, 2, 2) solid;
+  border-width: 1px;
+}
 .imageCont {
   margin-top: 10px;
   border-radius: 20px;
@@ -29,6 +43,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  top: 50px;
   width: 500px;
   box-shadow: 5px 5px 20px 10px rgb(211, 2, 2);
   position: relative;
@@ -36,7 +51,6 @@
   transform: translate(15%, -10%);
   background: rgba(68, 2, 2, 0.5);
   box-sizing: border-box;
-
   border-radius: 40px;
 }
 
@@ -46,8 +60,9 @@
 
 .form .space .input {
   width: 100%;
-  padding: 10px 0;
+  padding: 10px;
   font-size: 16px;
+
   color: #fff;
   margin-bottom: 30px;
   border: none;
@@ -58,13 +73,22 @@
 
 .form .space .labels {
   position: absolute;
-  top: 0;
+  top: -20px;
   left: 0;
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
   pointer-events: none;
   transition: 0.5s;
+}
+.errors {
+  position: relative;
+  top: -30px;
+  font-size: 10px;
+}
+.errors1 {
+  position: relative;
+  font-size: 10px;
 }
 
 .form .space .input:focus ~ .labels {
@@ -74,6 +98,7 @@
   font-size: 12px;
 }
 .select {
+  text-transform: capitalize;
   font-size: 18px;
   color: #fff;
   option {
@@ -89,6 +114,8 @@
 .button {
   position: relative;
   right: 10px;
+
+  top: 20px;
   border: 2px solid rgb(210, 12, 12);
   height: 40px;
   border-radius: 20px 5px 20px 0px;

@@ -24,7 +24,7 @@ export default function SearchBar() {
         className={styles.searchInput}
         type="text"
         placeholder="Name..."
-        value={state}
+        value={state?.toLocaleLowerCase()}
         onChange={handleChange}
       />
       <button
