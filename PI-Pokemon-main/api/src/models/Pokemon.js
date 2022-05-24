@@ -116,7 +116,7 @@ module.exports = (sequelize) => {
         },
       },
       defaultValue:
-        "https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-0.png",
+        "https://i5.walmartimages.com/asr/08d3e234-2836-4c58-a11b-f8da7f9ec12c_1.dbe5da88bcc66eb92919ec68321f296c.jpeg",
     },
     createdDb: {
       type: DataTypes.BOOLEAN,

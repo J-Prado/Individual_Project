@@ -19,14 +19,14 @@ router.get("/", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log("There is an error here");
     return res.status(400).send("The requested Pokemon was not found");
   }
 });
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     const pokeFoundId = await getId(id);
     if (pokeFoundId) return res.status(200).json(pokeFoundId);
   } catch (error) {
@@ -34,6 +34,7 @@ router.get("/:id", async (req, res) => {
     return res.status(404).send("The requested Pokemon was not found");
   }
 });
+
 router.post("/", async (req, res) => {
   try {
     const pokeData = req.body;
