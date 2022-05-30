@@ -4,18 +4,19 @@
   align-items: center;
   margin-top: 100px;
   width: 700px;
-  height: 420px;
+  height: 430px;
   box-shadow: 0px 0px 40px 20px #999;
   position: relative;
-  left: 450px;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 50px;
   background-image: url("http://skybots.net/drop-view/skybots_purple-background.png-viewInvertGBR");
 }
 
 .image {
   height: 300px;
+  width: 300px;
   position: relative;
-  left: -100px;
 }
 .card {
   display: flex;
@@ -38,7 +39,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  left: -50px;
+  left: 20px;
   gap: 0%;
 }
 

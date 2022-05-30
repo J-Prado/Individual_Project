@@ -22,3 +22,28 @@
   background-color: #000;
   color: #fff;
 }
+.footBtn1 {
+  font-size: 20px;
+  font-family: "Zen Dots", cursive;
+  position: relative;
+
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+.footBtn2 {
+  cursor: pointer;
+  font-size: 20px;
+  font-family: "Zen Dots", cursive;
+  position: relative;
+
+  border-radius: 50%;
+
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}

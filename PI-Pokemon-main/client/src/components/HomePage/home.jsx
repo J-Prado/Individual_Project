@@ -29,7 +29,7 @@ export default function Home() {
   //Now the pagination has to be limited to 12 in each page
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(12);
-
+  //Here we get the pokemon index
   const lastPokemon = page * perPage;
   const firstPokemon = lastPokemon - perPage;
 
@@ -69,6 +69,7 @@ export default function Home() {
   const handleFilterDataBase = (event) => {
     dispatch(dbPokemons(event.target.value));
   };
+
   const handleNameFor = (event) => {
     event.preventDefault();
     dispatch(forwardAlphabet(event.target.value));
@@ -111,9 +112,9 @@ export default function Home() {
           handleClick={handleClick}
         />
         <div className={styles.cards}>
-          {statePokemon.length === 0 ? (
+          {statePokemon?.length === 0 ? (
             <LoadingPage />
-          ) : statePokemon.length === 1 && statePokemon[0].message ? (
+          ) : statePokemon?.length === 1 && statePokemon[0].message ? (
             <NotFound />
           ) : (
             filterPages()?.map((e) => {
@@ -134,7 +135,9 @@ export default function Home() {
           statePokemon.message ===
             "Request failed with status code 404" ? null : (
             <Pagination
-              allPokemons={statePokemon.length}
+              page={page}
+              setPage={setPage}
+              allPokemons={statePokemon?.length}
               pokemonsPerPage={perPage}
               pagination={pagination}
             />

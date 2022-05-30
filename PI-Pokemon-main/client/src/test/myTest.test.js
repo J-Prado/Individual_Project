@@ -1,14 +1,13 @@
-// import { render, screen } from "@testing-library/react";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../App.js";
 import { configure, mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-// import { BrowserRouter } from "react-router-dom";
+
 import { store } from "../reactRedux/store/index.js";
 import { Provider } from "react-redux";
 import { CreationPage } from "../components/CreationPage/creationPage.jsx";
-// import nock from "nock";
+
 import { LandingPage } from "../components/LandingPage/landingPage.jsx";
 import Home from "../components/HomePage/home.jsx";
 import { Detail } from "../components/CharDetail/detail.jsx";

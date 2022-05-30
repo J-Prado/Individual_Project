@@ -24,6 +24,11 @@ export default function NavBar({
             onClick={handleClick}
           />
         </div>
+        <div className={styles.navBut}>
+          <Link to="/create">
+            <button>Create Pokemon</button>
+          </Link>
+        </div>
         <div className={styles.navSelect}>
           <select onChange={handleFilterType}>
             <option value="all" key="all">
@@ -69,12 +74,6 @@ export default function NavBar({
             </button>
           </div>
           <SearchBar />
-        </div>
-
-        <div className={styles.navBut}>
-          <Link to="/create">
-            <button>Create Pokemon</button>
-          </Link>
         </div>
       </nav>
     </React.Fragment>

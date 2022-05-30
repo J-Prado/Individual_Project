@@ -10,10 +10,10 @@
 
 .navContainer2 {
   display: flex;
-  gap: px;
+  gap: 0px;
   align-items: center;
   position: relative;
-  left: -200px;
+  left: -14%;
   transition: 0.5s;
   border-radius: 50px;
   overflow: hidden;
@@ -39,7 +39,7 @@
   appearance: button;
   outline: none;
   position: relative;
-  left: 1050px;
+  left: 70%;
   --h: 1.2em;
 }
 select {
@@ -98,6 +98,7 @@ select {
   position: relative;
   left: -100px;
 }
+
 .navButtons {
   box-shadow: 0 0.5px 5px rgb(208, 27, 27);
   border-radius: 20px;
@@ -110,7 +111,7 @@ select {
 
 .navBut {
   position: absolute;
-  right: 10px;
+  left: 89vw;
   border: 2px solid rgb(210, 12, 12);
 
   height: 40px;

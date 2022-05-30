@@ -1,4 +1,5 @@
 import {
+  CLEAR_STATE,
   GET_POKEMON,
   GET_TYPES,
   SEARCH_BY_ID,
@@ -22,6 +23,12 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_STATE:
+      return {
+        ...state,
+        search: null,
+      };
+
     case GET_POKEMON:
       return {
         ...state,
@@ -75,10 +82,17 @@ const rootReducer = (state = initialState, action) => {
         action.payload === "dataBase"
           ? allPokemons.filter((el) => el.createdDb)
           : allPokemons.filter((el) => !el.createdDb);
-      return {
-        ...state,
-        pokemons: action.payload === "all" ? state.pokemonsBack : filterDb,
-      };
+
+      return filterDb?.length === 0
+        ? {
+            ...state,
+            pokemons: [...state.pokemons],
+            error: window.alert("No Pokemon Found in DB"),
+          }
+        : {
+            ...state,
+            pokemons: action.payload === "all" ? state.pokemonsBack : filterDb,
+          };
 
     case POKEMON_TYPE:
       const pokemonBack = state.pokemonsBack;
@@ -86,10 +100,16 @@ const rootReducer = (state = initialState, action) => {
         action.payload === "all"
           ? pokemonBack
           : pokemonBack.filter((p) => p.types.includes(action.payload));
-      return {
-        ...state,
-        pokemons: filterType,
-      };
+      return filterType?.length === 0
+        ? {
+            ...state,
+            pokemons: [...state.pokemons],
+            error: window.alert("There is no Pokemon found."),
+          }
+        : {
+            ...state,
+            pokemons: filterType,
+          };
 
     case POST_POKEMONS:
       return {

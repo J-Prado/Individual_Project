@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getById } from "../../reactRedux/actions/index.js";
+import { clear } from "../../reactRedux/actions/index.js";
 
 import styles from "../CharDetail/Detail.module.scss";
 import LoadingPage from "../LoadingPage/loadingPage.jsx";
@@ -13,6 +14,9 @@ export function Detail() {
 
   useEffect(() => {
     dispatch(getById(id));
+    return () => {
+      dispatch(clear());
+    };
   }, [dispatch, id]);
 
   return (
@@ -36,6 +40,11 @@ export function Detail() {
             <img
               className={styles.image}
               src={detailPoke.image}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/769px-Pokebola-pokeball-png-0.png";
+              }}
               alt={detailPoke.name}
             />
             <div className={styles.details}>

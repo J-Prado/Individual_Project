@@ -5,8 +5,11 @@
   text-align: center;
   align-content: center;
   justify-content: center;
-  position: absolute;
-  top: 100px;
+  position: realtive;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .container > .load {
   font-size: 130px;

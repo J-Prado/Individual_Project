@@ -1,5 +1,5 @@
 import axios from "axios";
-
+export const CLEAR_STATE = "CLEAR_STATE";
 export const GET_POKEMON = "GET_POKEMON";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const SEARCH_BY_ID = "SEARCH_BY_ID";
@@ -22,7 +22,11 @@ export function getPokemon() {
     });
   };
 }
-
+export function clear() {
+  return function (dispatch) {
+    return dispatch({ type: CLEAR_STATE });
+  };
+}
 export function get_types() {
   return async function (dispatch) {
     const res = await axios.get("/types");
@@ -44,7 +48,7 @@ export function getByName(name) {
         payload: [json],
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return error;
     }
   };
@@ -52,12 +56,6 @@ export function getByName(name) {
 
 export function getById(id) {
   return async function (dispatch) {
-    // if (id === "clear") {
-    //   dispatch({
-    //     type: SEARCH_BY_ID,
-    //     payload: "clear",
-    //   });
-    // }
     const res = await axios.get(`/pokemons/${id}`);
     const json = await res.data;
     return dispatch({

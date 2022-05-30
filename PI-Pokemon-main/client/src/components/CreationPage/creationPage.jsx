@@ -124,16 +124,22 @@ export function CreationPage() {
   };
 
   const handleSelect = (event) => {
-    setInput({
-      ...input,
-      types: [...input.types, event.target.value],
-    });
-    setError(
-      validation({
+    const typeExist = input.types.find((e) => e === event.target.value);
+    //better with include correct
+    if (typeExist) {
+      setError(
+        validation({
+          ...input,
+          types: [...input.types, event.target.value],
+        })
+      );
+    } else {
+      setInput({
         ...input,
         types: [...input.types, event.target.value],
-      })
-    );
+      });
+    }
+
     console.log(input.types);
   };
 
