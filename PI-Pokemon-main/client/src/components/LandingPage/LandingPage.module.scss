@@ -50,15 +50,14 @@
 .button {
   transform: rotatex(10deg);
   animation: rotateAngle 6s linear infinite;
-  position: relative;
+
   margin: 0.5em 0;
   padding: 0.8em 2.2em;
   cursor: pointer;
   font-family: "Monoton", cursive;
-
-  top: -8rem;
-  left: -18.5rem;
-
+  top: 10em;
+  left: 4em;
+  position: fixed;
   background: #ffffff;
   border: none;
   border-radius: 0.4em;
