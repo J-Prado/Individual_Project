@@ -14,7 +14,7 @@ const getPokemons = async () => {
     let information = pokemons.map((pokemon) => objPokeApi(pokemon));
     return information;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -45,31 +45,31 @@ const getDbPok = async () => {
     });
     return dataBasePok;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
 
-// Esto se debe exportar
+// This must be exported
 const getAllPokemons = async () => {
   try {
     const apiPokemon = await getPokemons();
     const dbPokemon = await getDbPok();
     return [...apiPokemon, ...dbPokemon];
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
 
-// Esto se debe exportar
+// This must be exported
 const getName = async (name) => {
   try {
     const pokemonFromDb = await Pokemon.findOne({
       where: { name },
       include: Type,
     });
-    console.log(pokemonFromDb);
+    // console.log(pokemonFromDb);
     if (pokemonFromDb) {
       let dbName = {
         id: pokemonFromDb.id,
@@ -90,15 +90,16 @@ const getName = async (name) => {
         `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
       );
       const foundApi = objPokeApi(apiNames.data);
+      // console.log(foundApi);
       return foundApi;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
 
-// Esto se debe exportar
+// This must be exported
 const getId = async (id) => {
   try {
     if (id.length > 2) {
@@ -125,16 +126,32 @@ const getId = async (id) => {
       const searchId = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${id.toString()}`
       );
-      const foundApi = objPokeApi(searchId.data);
+      const foundApi = objDetail(searchId.data);
       return foundApi;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
 
 const objPokeApi = (poke) => {
+  const objPokeApi = {
+    id: poke.id,
+    name: poke.name,
+    // hp: poke.stats[0].base_stat,
+    attack: poke.stats[1].base_stat,
+    // defense: poke.stats[2].base_stat,
+    // speed: poke.stats[5].base_stat,
+    // height: poke.height,
+    // weight: poke.weight,
+    image: poke.sprites.other.dream_world.front_default,
+    types: poke.types.map((e) => e.type.name),
+  };
+  return objPokeApi;
+};
+
+const objDetail = (poke) => {
   const objPokeApi = {
     id: poke.id,
     name: poke.name,
@@ -150,7 +167,7 @@ const objPokeApi = (poke) => {
   return objPokeApi;
 };
 
-// Esto se debe exportar
+// This must be exported
 const postPokeDb = async (pokeData) => {
   try {
     const { name, hp, attack, defense, speed, height, weight, image, types } =
@@ -176,7 +193,7 @@ const postPokeDb = async (pokeData) => {
     let createdMyPoke = await myPokemon.setTypes(dbTypes);
     return createdMyPoke;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
