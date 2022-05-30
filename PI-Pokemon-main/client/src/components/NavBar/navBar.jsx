@@ -42,9 +42,7 @@ export default function NavBar({
               );
             })}
           </select>
-        </div>
 
-        <div className={styles.navSelect}>
           <select onChange={handleFilterDataBase}>
             <option value="all">All Pokemons</option>
             <option value="dataBase">My Pokemons</option>
